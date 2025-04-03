@@ -1,0 +1,49 @@
+1from numpy import *
+g=array([
+[1,2,3],
+[4,5,6],
+[7,8,'*']
+])
+a=array([[input("enter intial state values") for i in range(3)]for i in range(3)])
+print(a)
+print("************goal state**********")
+print(g)
+def her(a):
+  h=0
+  for i in range(3):
+    for j in range(3):
+      if(a[i,j]!=g[i,j]):
+        h=h+1
+  if(h==0):
+    print(a)
+    print("goal reached")
+    exit()
+
+def space(a):
+  m1,m2=0,0
+  for i in range(3):
+    for j in range(3):
+      if(a[i,j]=='*'):
+        m1=i
+        m2=j
+  return m1,m2
+def swap(a):
+  her(a)
+  m1,m2=space(a)
+  i=int(input("enter row"))
+  j=int(input("enter col"))
+
+  if((i-m1==1 and j-m2==0) or ((i-m1==0) and (j-m2==1))):
+    temp=a[i,j]
+    a[i,j]=a[m1,m2]
+    a[m1,m2]=temp
+  elif((i-m1==-1 and j-m2==0) or ((i-m1==0) and (j-m2==-1))):
+    temp=a[i,j]
+    a[i,j]=a[m1,m2]
+    a[m1,m2]=temp
+  else:
+    print('not able to play')
+    print(a)
+while(1):
+  swap(a)
+  print(a)
